@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间函数</title>
+</head>
+<body>
+    <button onclick="openBaidu();">打开百度</button>
+    <hr>
+    <button onclick="Disp()">开始</button>
+    <button onclick="Stop()">暂停</button>
+    <hr>
+    <h2 id="time"></h2>
+</body>
+<script type="text/javascript">
+    function openBaidu() {
+        setTimeout(baidu,3000);
+    }
+    function baidu() {
+        open("http://www.baidu.com");
+    }
+    var id;
+    function Disp() {
+        var time = new Date().toLocaleTimeString();
+        document.getElementById("time").innerHTML = time;
+        id = setTimeout(Disp,1000);
+    }
+    function Stop() {
+        clearTimeout(id);
+    }
+</script>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提交表单</title>
+</head>
+<body>
+    <form action="http://www.baidu.com" id="form">
+        姓名：<input type="text" id="uname">
+        <input type="submit" value="submit" onclick="return isNull()">
+    </form>
+</body>
+<script type="text/javascript">
+    function isNull() {
+        var uname = document.getElementById("uname").value;
+        console.log(uname);
+        if (uname == null || uname.trim() == "") {
+            return false;
+        }
+        return true;
+    }
+</script>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两种导航样式</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei','微软雅黑',"楷体";
+        }
+
+        /* 设置侧边导航 */
+        .side_menu {
+            list-style: none;
+            border: 1px solid #333333;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+        }
+        .side_menu li {
+            font-size: 18px;
+            line-height: 2.4em;
+            border-bottom: double 2px #dddddd;
+        }
+        .side_menu li:last-child {
+            border: none;
+        }
+        .side_menu li a {
+            text-decoration: none;
+            color: #333333;
+        }
+        .side_menu li a:hover {
+            color: coral;
+        }
+
+        /* 设置横向导航 */
+        .navbar {
+            list-style: none;
+            /* background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%); */
+            background: #4c6ca0;
+            margin: 0;
+            padding: 0;
+            border-radius: 5px;
+            overflow: auto;
+        }
+        .navbar li {
+            float: left;
+        }
+        .navbar li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        .navbar li a:hover {
+            /* background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%); */
+            background: #446190;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <ul class="navbar">
+        <li><a href="#">主页</a></li>
+        <li><a href="#">关于我们</a></li>
+        <li><a href="#">服务</a></li>
+        <li><a href="#">联系</a></li>
+    </ul>
+
+    <!-- 侧边导航 -->
+    <ul class="side_menu">
+        <li><a href="#">主页</a></li>
+        <li><a href="#">关于我们</a></li>
+        <li><a href="#">服务</a></li>
+        <li><a href="#">联系</a></li>
+    </ul>
+</body>
+</html>

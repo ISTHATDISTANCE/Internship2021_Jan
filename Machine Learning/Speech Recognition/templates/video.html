@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!--<video id="video" width="500" height="500" autoplay></video>-->
+<button id="start">start</button>
+<button id="stop">stop</button>
+<button id="download">download</button>
+<div id="result"></div>
+</body>
+<script src="../static/jquery-3.5.1.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var stt = document.getElementById("start")
+    stt.onclick = function () {
+        navigator.mediaDevices.getUserMedia({
+            audio: true,
+            video: false,
+        }).then(stream => {
+            var rcgn = new webkitSpeechRecognition();
+            rcgn.continuous = true;
+            rcgn.interimResults = true;
+            rcgn.lang = 'cmn-Han-CN';
+            console.log(MediaRecorder.isTypeSupported('audio/webm'))
+            var mediaRecorder = new MediaRecorder(stream, {
+                audioBitsPerSecond: 128000,
+                mimeType: 'audio/webm'
+            })
+                console.log("start recording")
+                mediaRecorder.start()
+                rcgn.start()
+            var stp = document.getElementById("stop")
+            stp.onclick = function () {
+                console.log("stop recording")
+                if (mediaRecorder.state !== 'inactive') {
+                    mediaRecorder.stop()
+                }
+                rcgn.abort()
+                // console.log(stream.getAudioTracks())
+                // stream.getAudioTracks()[0].stop()
+                // console.log(stream.getAudioTracks())
+            }
+            rcgn.onresult = function (evt) {
+                $("#result").html(evt["results"]['0']['0']['transcript'])
+                if (mediaRecorder.state !== 'inactive') {
+                    mediaRecorder.stop()
+                }
+            }
+            mediaRecorder.ondataavailable = function (data) {
+                // console.log(data.data)
+                blob = new Blob([data.data], {'type': 'audio/mp3'})
+                let file = new window.File([data.data], 'audio', {type: 'audio/mp3'})
+                // console.log(file)
+                let form = new FormData()
+                form.append('wave_file', file)
+                console.log('xml')
+                var xml = new XMLHttpRequest()
+                xml.open('POST', '/save')
+                xml.send(form)
+            }
+            var dow = document.getElementById("download")
+            dow.onclick = function () {
+                console.log("Start downloading")
+                $.ajax({
+                    type: 'GET',
+                    url: '/download',
+                    success: function (data) {
+                        console.log(data["result"])
+                        let a = document.createElement('a')
+                        a.href = URL.createObjectURL(blob)
+                        a.download = 'Record.mp3'
+                        a.click()
+                        console.log(blob)
+                    }
+                })
+            }
+        }).catch(err => {
+            console.log(err)
+
+        })
+    }
+
+
+</script>
+</html>

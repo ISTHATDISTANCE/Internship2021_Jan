@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统对话框</title>
+</head>
+<body>
+    <button type="button" onclick="testPrompt();">Prompt</button>
+    <button onclick="testConfirm();">关闭窗口</button>
+</body>
+<script type="text/javascript">
+    function testPrompt() {
+        var str = prompt("请输入","");
+        console.log(str);
+    }
+    function testConfirm() {
+        var flag = confirm("真的要退出吗？");
+        if (flag) {
+            window.close();
+        } else {
+            window.alert("就这就这？");
+        }
+    }
+</script>
+</html>

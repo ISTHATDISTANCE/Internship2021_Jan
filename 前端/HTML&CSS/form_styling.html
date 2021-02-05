@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Microsoft YaHei";
+            background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+            color: #ffffff;
+            line-height: 1.8;
+        }
+        a {
+            text-decoration: none;
+        }
+        .container {
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        .form_wrap {
+            background:rgba(255, 255, 255, 0.5);
+            color: #333333;
+            padding: 15px 25px;
+        }
+        .form_wrap h1, .form_wrap p {
+            text-align: center;
+        }
+        .form_wrap .form_group {
+            margin-top: 15px;
+        }
+        .form_wrap .form_group label {
+            display: block;
+            color: #666666;
+        }
+        .form_group input {
+            width: 100%;
+            padding: 10px;
+            border: #dddddd 1px solid;
+            border-radius: 5px;
+        }
+        .form_wrap button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background: #49c1a2;
+            color: white;
+            cursor: pointer;
+        }
+        .form_wrap button:hover {
+            background: #37a08e;
+        }
+        .form_wrap .bottom_text {
+            font-size: 13px;
+            margin-top: 10px;
+
+        }
+        footer a{
+            color: #7a4ff1;
+        }
+        footer {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form_wrap">
+            <h1>注册</h1>
+        <p>注册成为会员</p>
+        <form action="">
+            <div class="form_group">
+                <label for="name">姓名</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div class="form_group">
+                <label for="sex">性别</label>
+                <select name="sex" id="sex">
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                    <option value="other">其他</option>
+                </select>
+            </div>
+            <div class="form_group">
+                <label for="email">邮箱</label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div class="form_group">
+                <label for="username">用户名</label>
+                <input type="text" name="username" id="username">
+            </div>
+            <div class="form_group">
+                <label for="psw">密码</label>
+                <input type="password" name="psw" id="psw">
+            </div>
+            <div class="form_group">
+                <label for="psw2">确认密码</label>
+                <input type="password" name="psw2" id="psw2">
+            </div>
+            <button type="submit">注册</button>
+            <p class="bottom_text">点击<a href="#">这里</a>了解我们的详细条款</p>
+        </form>
+        </div>
+        <footer>
+        <a href="#">登录现有账号</a>
+        </footer>
+    </div>
+    
+</body>
+</html>

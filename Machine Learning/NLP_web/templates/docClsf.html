@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Classification</title>
+
+    <link rel="stylesheet" href="../static/iconfont.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+            height: 760px;
+            color: #ffffff;
+            line-height: 1.8;
+        }
+        .main {
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        .log {
+            background: rgba(255, 255, 255, 0.5);
+            color: #333333;
+            padding: 15px 25px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .inputs{
+            {#display: block;#}
+            width: 100%;
+            padding: 10px;
+            margin: 5px 20px;
+            {#border: 200px;#}
+        }
+        button {
+            display: block;
+            width: 20%;
+            padding: 10px;
+            margin: auto;
+            font-size: 15pt;
+        }
+        input {
+            outline: none;
+        }
+        #body {
+            background: rgba(255, 255, 255, 0.5);
+            color: #333333;
+            padding: 15px 25px;
+            text-align: center;
+            font-size: large;
+            margin: 20px 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="body">
+        <div style="text-align: justify">注：我们会将您输入的文本预测为文化、娱乐、体育、财经、房产、汽车、教育、科技、军事、旅游、国际、证券、农业、电竞、民生十五个类别。
+            如果预测错误，您可以手动进行修改。</div>
+        <hr style="margin: 20px auto">
+        <label for="content" style="display: block">请输入文本</label>
+        <textarea name="content" id="content" class="inputs" cols="30" rows="5" style="font-family: Microsoft YaHei; margin: 5px 20px; width: 481px; height: 144px;"></textarea>
+        <button type="button" onclick="predict()">预 测</button>
+        <div id="result" style="color: #822739;margin-top: 5px; font-size: 16pt"></div>
+        <hr id="sep1" style="display: none">
+        <div id="isTrue" style="display: none">是您想要的答案吗？</div>
+        <button type="button" id="btn1" style="display: none" onclick="yes()">是</button>
+        <button type="button" id="btn2" style="display: none" onclick="no()">否</button>
+        <hr id="sep2" style="display: none">
+        <select name="select" id="select" style="display: none">
+            <option value="-1">请选择类别</option>
+            <option value="0">文化</option>
+            <option value="1">娱乐</option>
+            <option value="2">体育</option>
+            <option value="3">财经</option>
+            <option value="4">房产</option>
+            <option value="5">汽车</option>
+            <option value="6">教育</option>
+            <option value="7">科技</option>
+            <option value="8">军事</option>
+            <option value="9">旅游</option>
+            <option value="10">国际</option>
+            <option value="11">证券</option>
+            <option value="12">农业</option>
+            <option value="13">电竞</option>
+            <option value="14">民生</option>
+        </select>
+        <button type="button" id="confirm" style="display: none" onclick="confirm()">确 认</button>
+    </div>
+</body>
+<script src="../static/jquery-3.5.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    function predict() {
+        var content = $("#content").val()
+        var data = {
+            "content": content
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/predict_doc',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function (res) {
+                if (res["result"] != "NULL") {
+                    $("#result").html('预测结果：' + res['result'])
+                    $("#sep1").attr("style", "display: block")
+                    $("#isTrue").attr("style", "display: block; margin-top: 10px;")
+                    $("#btn1").attr("style", "display: inline-block; margin: 10px;")
+                    $("#btn2").attr("style", "display: inline-block; margin: 10px;")
+                } else {
+                    $("#result").html("输入仅含停用词，无法判断。。。")
+                }
+            }
+        })
+    }
+
+    function yes() {
+        location.href = '/doc_classify'
+    }
+
+    function no() {
+        $("#sep2").attr("style","display: block")
+        $("#select").attr("style", "display: inline-block")
+        $("#confirm").attr("style", "display: block; margin: 10px auto")
+    }
+
+    function confirm() {
+        var cla = $("#select").val()
+        var content = $("#content").val()
+        console.log(cla)
+        if (cla !== "-1") {
+            var data = {
+                "class": cla,
+                "content": content
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/add',
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (res) {
+                    if (res['result'] === "done") {
+                        location.href = '/training_done'
+                    }
+                }
+            })
+        }
+
+    }
+</script>
+</html>

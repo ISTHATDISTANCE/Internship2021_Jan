@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+<h1>Hello, please select your province</h1>
+<label for="province">Provinces</label>
+{#<div>{{ res }}</div>#}
+<select name="province" id="province" onchange="sendCity()">
+    <option value="-1">请选择</option>
+    {% for name in res %}
+        <option value={{ name }}>{{ name }}</option>
+    {% endfor %}
+</select>
+<br>
+<label for="city">City</label>
+<select name="city" id="city" disabled=true onchange="sendCounty()">
+</select>
+<br>
+<label for="county">County</label>
+<select name="county" id="county" disabled=true>
+</select>
+
+</body>
+<script src="../static/jquery-3.5.1.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript">
+    function sendCity() {
+        var selected = $("#province").prop("value");
+        if (selected === "-1") return;
+        var data = {"province": selected};
+        $.ajax({
+            type: "post",
+            url: "/showcity",
+            data: JSON.stringify(data),
+            contentType: 'application/json; charset=UTF-8',
+            success: function (data) {
+                console.log(data);
+                $("#city").children().remove();
+                $("#city").append("<option value=\"-1\">请选择</option>");
+                $("#county").children().remove();
+                $("#county").append("<option value=\"-1\">请选择</option>");
+                $("#city").prop("disabled", false);
+                for (var i = 0; i < data.length; i++) {
+                    var str = "<option value=\'"+data[i]+"\'>" + data[i] + "</option>"
+                    $("#city").append(str)
+                }
+            },
+            error: function () {
+                console.log("error!")
+            }
+        })
+    }
+
+    function sendCounty() {
+        var selected = $("#city").prop("value");
+        if (selected === "-1") return;
+        {#console.log(selected);#}
+        var data = {"city": selected};
+        {#console.log(data);#}
+        $.ajax({
+            type: "post",
+            url: "/showcounty",
+            data: JSON.stringify(data),
+            contentType: 'application/json; charset=UTF-8',
+            success: function (data) {
+                console.log(data);
+                $("#county").children().remove();
+                $("#county").append("<option value=\"-1\">请选择</option>");
+                $("#county").prop("disabled", false);
+                for (var i = 0; i < data.length; i++) {
+                    var str = "<option value=\'"+data[i]+"\'>" + data[i] + "</option>"
+                    $("#county").append(str)
+                }
+            },
+            error: function () {
+                console.log("error!")
+            }
+        })
+    }
+</script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS选择器</title>
+    <style>
+        /* class 选择器 */
+        .primary_header
+        {
+            color: orange;
+        }
+
+        /* id 选择器 */
+        #welcome
+        {
+            background: #f4f4f4;
+        }
+
+        /* 多选择器 */
+        #welcome #about
+        {
+            border: 1px solid #cccccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* 嵌套选择器 */
+        #welcome p 
+        {
+            font-size: 20px;
+        }
+
+        body
+        {
+            background: purple;
+        }
+    </style>
+</head>
+<body>
+    <div id="welcome">
+        <h2 class="primary_header">
+            Ltt
+        </h2>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda accusantium, distinctio ex numquam magnam harum optio sapiente natus adipisci unde iure rerum inventore voluptatum maiores molestias cum! Iure, quidem officiis?
+        </p>
+    </div>
+
+    <div id="about">
+        <h2>
+            关于
+        </h2>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo necessitatibus quia deserunt. Corrupti eligendi cupiditate soluta neque similique voluptas adipisci?
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="iconfont.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Microsoft YaHei";
+        background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+        color: #ffffff;
+        line-height: 1.8;
+      }
+      a {
+        text-decoration: none;
+      }
+      .container {
+        max-width: 500px;
+        margin: 30px auto;
+        padding: 20px;
+      }
+      .form_wrap {
+        background: rgba(255, 255, 255, 0.5);
+        color: #333333;
+        padding: 15px 25px;
+      }
+      .form_wrap h1,
+      .form_wrap p {
+        text-align: center;
+      }
+      .form_wrap .form_group {
+        margin-top: 15px;
+      }
+      .form_wrap .form_group label {
+        display: block;
+        color: #666666;
+      }
+      .form_group input {
+        width: 100%;
+        padding: 10px;
+        border: #dddddd 1px solid;
+        border-radius: 5px;
+      }
+      .form_wrap button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        background: #49c1a2;
+        color: white;
+        cursor: pointer;
+      }
+      .form_wrap button:hover {
+        background: #37a08e;
+      }
+      .form_wrap .bottom_text {
+        font-size: 13px;
+        margin-top: 10px;
+      }
+      footer a {
+        color: #7a4ff1;
+      }
+      footer {
+        text-align: center;
+      }
+      .form_group #nameLable {
+        display: inline-block;
+        width: 100px;
+      }
+      #psw {
+        display: inline-block;
+        width: 385px;
+      }
+      #demo_img {
+        display: inline-block;
+      }
+      .err {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form_wrap">
+        <h1>注册</h1>
+        <p>description</p>
+        <form action="">
+          <div class="form_group">
+            <label for="name" id="nameLabel">姓名</label>
+            <input type="text" name="name" id="name" />
+            <div id="nameErr" class="err"></label>
+          </div>
+          <div class="form_group">
+            <label for="sex">性别</label>
+            <select name="sex" id="sex">
+              <option value="-1">请选择</option>
+              <option value="male">男</option>
+              <option value="female">女</option>
+              <option value="other">其他</option>
+            </select>
+            <div id="sexErr" class="err"></div>
+          </div>
+          <div class="form_group">
+            <label for="email">邮箱</label>
+            <input type="email" name="email" id="email" />
+          </div>
+          <div class="form_group">
+            <span class="iconfont icon-nickname"></span>
+            <label for="username">用户名</label>
+            <input type="text" name="username" id="username" />
+            <div id="usernameErr" class="err"></div>
+          </div>
+          <div class="form_group">
+            <span class="iconfont icon-visible"></span>
+            <label for="psw">密码</label>
+            <input type="password" name="psw" id="psw" />
+            <img
+              id="demo_img"
+              onclick="hideShowPsw()"
+              src="visible.png"
+              width="20px"
+            />
+            <div id="pswErr" class="err"></div>
+          </div>
+          <div class="form_group">
+            <label for="psw2">确认密码</label>
+            <input type="password" name="psw2" id="psw2" />
+            <div id="psw2Err" class="err"></div>
+          </div>
+          <!-- 控制密码可见性 -->
+          <script type="text/javascript">
+            var demoImg = document.getElementById("demo_img");
+            var input2 = document.getElementById("psw2")
+            var demoInput = document.getElementById("psw");
+            function hideShowPsw() {
+              if (demoInput.type == "password") {
+                demoInput.type = "text";
+                demoImg.src = "invisible.png";
+                input2.type = "text";
+              } else {
+                demoInput.type = "password";
+                demoImg.src = "visible.png";
+                input2.type = "password";
+              }
+            }
+          </script>
+          <button type="submit" onclick="return checkForm();">注册</button>
+          <p class="bottom_text">点击<a href="#">这里</a>了解我们的详细条款</p>
+        </form>
+      </div>
+      
+      <footer>
+        <a href="login.html">登录现有账号</a>
+      </footer>
+    </div>
+  </body>
+  <script type="text/javascript">
+    function $(id) {
+      return document.getElementById(id);
+    }
+    function isNull(str) {
+      return (str == null ||str.trim() == "");
+    }
+    function checkForm() {
+      var uname = $("name").value;
+      if (isNull(uname)) {
+        $("nameErr").innerHTML = "姓名不能为空!";
+        return false;
+      }
+      $("nameErr").innerHTML = "";
+      var sex = $("sex").selectedIndex;
+      if (sex == 0) {
+        $("sexErr").innerHTML = "请选择性别！";
+        // console.log(sex);
+        return false;
+      }
+      $("sexErr").innerHTML = "";
+      var username = $("username").value;
+      if (isNull(username)) {
+        $("usernameErr").innerHTML = "用户名不能为空！";
+        return false;
+      }
+      if (username.length < 4) {
+        $("usernameErr").innerHTML = "用户名长度少于4！";
+        return false;
+      }
+      if (username[0]>='0' && username[0]<='9' || username[0] == '_') {
+        $("usernameErr").innerHTML = "用户名不能以数字或下划线开头";
+        return false;
+      }
+      $("usernameErr").innerHTML = "";
+      var psw = $("psw").value;
+      // console.log(psw);
+      if (isNull(psw)) {
+        $("pswErr").innerHTML = "密码不能为空！";
+        return false;
+      }
+      if (psw.length < 8 || psw.length > 16) {
+        $("pswErr").innerHTML = "密码长度须在8到16位间！";
+        return false;
+      }
+      var hasNum = false, hasAlp = false;
+      for (var i = 0; i < psw.length; i++) if (!hasNum || !hasAlp) {
+        if (psw[i] >= '0' && psw[i] <= '9') {
+          hasNum = true;
+        }
+        if (psw[i] >= 'a' && psw[i] <= 'z' || psw[i] >= 'A' && psw[i] <= 'Z') {
+          hasAlp = true;
+        }
+      }
+      if (!hasNum || !hasAlp) {
+        $("pswErr").innerHTML = "密码需同时包含字符和数字！";
+        return false;
+      }
+      $("pswErr").innerHTML = "";
+      var psw2 = $("psw2").value;
+      if (psw2 != psw) {
+        $("psw2Err").innerHTML = "两次输入密码不相同";
+        return false;
+      }
+      $("psw2Err").innerHTML = "";
+      return true;
+    }
+  </script>
+</html>

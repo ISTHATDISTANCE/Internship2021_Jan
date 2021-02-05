@@ -1,0 +1,15 @@
+deb https://mirrors.ustc.edu.cn/ubuntu/ ii main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ ii main restricted universe multiverse
+
+deb https://mirrors.ustc.edu.cn/ubuntu/ ii-security main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ ii-security main restricted universe multiverse
+
+deb https://mirrors.ustc.edu.cn/ubuntu/ ii-updates main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ ii-updates main restricted universe multiverse
+
+deb https://mirrors.ustc.edu.cn/ubuntu/ ii-backports main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ ii-backports main restricted universe multiverse
+
+## Not recommended
+# deb https://mirrors.ustc.edu.cn/ubuntu/ ii-proposed main restricted universe multiverse
+# deb-src https://mirrors.ustc.edu.cn/ubuntu/ ii-proposed main restricted universe multiverse

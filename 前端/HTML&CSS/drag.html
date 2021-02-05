@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style type="text/css">
+    #div1 
+    {width: auto; height: auto; padding: 10px; border: 1px solid #aaaaaa;}
+    #div2 
+    {width: auto; height: auto; padding: 10px; border: 1px solid #aaaaaa;}
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag</title>
+    <script type="text/javascript">
+    function allowDrop(ev)
+    {
+        // 避免默认处理（以链接形式打开）
+        ev.preventDefault();
+    }
+    function drag(ev)
+    {
+        // dataTransfer.setData设置被拖动数据的数据类型和值（ev.target（可拖动元素）的id）
+        ev.dataTransfer.setData("Text",ev.target.id);
+    }
+    function drop(ev)
+    {
+        ev.preventDefault();
+        // 获得被托元素的数据（设置为相同数据类型的任何数据，值为被托数据的id）
+        var data=ev.dataTransfer.getData("Text");
+        // 把被托元素追加到放置元素中
+        ev.target.appendChild(document.getElementById(data));
+    }
+    </script>
+</head>
+<body>
+    <p>请拖动图片</p>
+    <!--ondragover：放到何处；默认元素无法放到其他元素中。故需要阻止对元素的默认处理方式；ondrop：进行放置-->
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div> 
+    <br />
+    <!--draggable：使元素可拖动；ondragstart：当元素被拖动时会发生什么（调用drag函数）；-->
+    <img id="drag1" src="sys1_100_1e-3.png" draggable="true" ondragstart="drag(event)" /> 
+    <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</body>
+</html>

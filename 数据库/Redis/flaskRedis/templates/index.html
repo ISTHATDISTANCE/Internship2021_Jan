@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<label for="txt">请输入验证码</label>
+<input type="text" name="txt" id="ipt">
+<button type="button" id="btn" onclick="send()">点击发送验证码</button>
+<br>
+<div id="code"></div>
+
+</body>
+<script src="../static/jquery-3.5.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    if (localStorage.pagecount) {
+        localStorage.pagecount = Number(localStorage.pagecount) + 1;
+    } else {
+        localStorage.pagecount = 1;
+    }
+    function timing(t) {
+        var str = "验证（" + t + "s）";
+        console.log(str);
+        $("#btn").text(str);
+        return window.setTimeout(function () {
+            if (t > 0) {
+                timing(t - 1)
+            } else {
+                $("#btn").text("点击发送验证码");
+            }
+        }, 1000);
+
+    }
+    function send() {
+        var data = {
+            "id": localStorage.pagecount
+        };
+        if ($("#btn").text() === "点击发送验证码") {
+            $.ajax({
+                type: "post",
+                url: "/verification",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (code) {
+                    console.log(code);
+                    $("#code").text(code["code"]);
+                    key = code["key"];
+                    timing(60);
+                },
+                error: function (err) {
+                    console.log("error!")
+                    console.log(err);
+                }
+            })
+        } else {
+            var datas = {
+                "input": $("#ipt").val(),
+                "key": key
+            }
+            $.ajax({
+                type: "post",
+                url: "/check",
+                data: JSON.stringify(datas),
+                contentType: "application/json",
+                success: function (res) {
+                    if (res["result"]) {
+                        window.location.href = "/success";
+                    } else {
+                        window.location.href = "/fail";
+                    }
+                }
+            })
+        }
+
+    }
+
+</script>
+</html>

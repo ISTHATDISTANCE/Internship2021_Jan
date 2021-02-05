@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition</title>
+</head>
+<body>
+    <button onclick="starp()">点 我</button>
+    <div id="result"></div>
+</body>
+<script src="../static/jquery-3.5.1.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript">
+    window.flag = 0;
+    function starp() {
+        var rcgn = new webkitSpeechRecognition();
+        rcgn.continuous = true;
+        rcgn.interimResults = true;
+        rcgn.lang = 'cmn-Han-CN';
+        if (!flag) {
+            rcgn.start()
+            window.flag = 1
+        } else {
+            rcgn.abort()
+            window.flag = 0
+        }
+        rcgn.onresult = function (evt) {
+            console.log(evt);
+            $("#result").html(evt["results"]['0']['0']['transcript'])
+        }
+        rcgn.onerror = function (evt) {
+            console.log(evt);
+        }
+    }
+</script>
+</html>

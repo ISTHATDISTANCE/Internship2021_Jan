@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage</title>
+</head>
+
+<body>
+    <!-- local storage对时间没有限制，一直会保存 -->
+    <script type="text/javascript">
+        localStorage.lastname = "Smith";
+        document.write(localStorage.lastname);
+        if (localStorage.pagecount) {
+            localStorage.pagecount = Number(localStorage.pagecount) + 1;
+        }
+        else {
+            localStorage.pagecount = 1;
+        }
+        document.write(" Visits " + localStorage.pagecount + " times.");
+    </script>
+    <br />
+    <!-- session storage在用户关闭浏览器后会删除数据 -->
+    <script type="text/javascript">
+        sessionStorage.lastname = "Smith";
+        document.write(sessionStorage.lastname);
+        if (sessionStorage.pagecount) {
+            sessionStorage.pagecount = Number(sessionStorage.pagecount) + 1;
+        }
+        else {
+            sessionStorage.pagecount = 1;
+        }
+        document.write(" Visits " + sessionStorage.pagecount + " times.");
+    </script>
+</body>
+
+</html>

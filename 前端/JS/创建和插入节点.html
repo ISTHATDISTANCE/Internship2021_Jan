@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建和插入节点</title>
+</head>
+<body>
+    <!-- 创建节点 -->
+    <!-- 
+        createElement()
+        createTextNode()
+        innerHTML
+     -->
+     <button onclick="addPara();">添加段落</button>
+     <button onclick="addImg();">添加图片</button>
+     <button onclick="addTxt();">添加文本框</button>
+     <button onclick="addOpt();">添加选项</button>
+     <select name="music" id="music">
+         <option value="-1">你心中的一首歌</option>
+         <option value="0">南山南</option>
+         <option value="1">喜欢你</option>
+     </select>
+     <hr>
+     <div id="container">
+
+     </div>
+</body>
+<script type="text/javascript">
+    function addPara() {
+        // // 创建p结点
+        // var p = document.createElement("p");
+
+        // var txt = document.createTextNode("lorem");
+        // // 将文本节点添加到p元素中
+        // p.appendChild(txt);
+
+        // console.log(p);
+        var div = document.getElementById("container");
+        // div.appendChild(p);
+
+        var p2 = "<p>lalala</p>";
+        div.innerHTML += p2;
+    }
+
+    function addImg() {
+        var div = document.getElementById("container");
+        var img = document.createElement("img");
+        // img.src = ...
+        // img.setAttribute
+        // img.innerHTML += <img src=.../>
+    }
+
+
+
+    function addOpt() {
+        var music = document.getElementsByName("music")[0];
+        var opt = document.createElement("option");
+
+        opt.value = 2;
+        opt.innerHTML = "晴天";
+        // music.appendChild(opt);
+        music.options.add(opt);
+    }
+</script>
+</html>
