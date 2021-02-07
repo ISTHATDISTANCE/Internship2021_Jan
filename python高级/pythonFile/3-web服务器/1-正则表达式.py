@@ -1,12 +1,10 @@
 import re
 
-names = ["name1", "_name", "2_name", "__name__"]
+# 判断163邮箱地址
 
-_nam = 1
+email = input("Email address: ")
 
-for nam in names:
-    res = re.match("[a-zA-Z_]+[\w]*", nam)
-    if res:
-        print("%s is legal" % nam)
-    else:
-        print("%s is illegal" % nam)
+if (re.match(r'^[a-zA-Z0-9_]{4,20}@(163|126|qq)\.com$', email)):
+    print("Valid")
+else:
+    print("Invalid")
